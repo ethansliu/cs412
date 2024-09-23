@@ -1,0 +1,25 @@
+body{
+    background-color: rgb(209, 203, 191);
+    margin: 0 auto;
+    text-align: center;
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+
+ul{
+    text-align: center;
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+
+.about{
+    text-align: center;
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+
+.quote{
+    text-align: center;
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
