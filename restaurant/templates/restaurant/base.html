@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+    <head>
+        <title>Hello, world!</title>
+        <!-- <link rel="stylesheet" href="/static/styles.css"> -->
+        <link rel="stylesheet" href="https://cs-people.bu.edu/esliu/cs412_hw3statics/css/pizzaStyles.css">
+    </head>
+    <body>
+
+    <nav>
+        <ul>
+            <!-- <a href="/hw/">Home</a> -->
+            <!-- <a href="/hw/about">About</a> -->
+             <!-- use the scriptlet URL function to look up a URL by name -->
+            <a href="{% url 'main' %}">Main</a>
+            <a href="{% url 'order' %}">Order</a>
+        </ul>
+    </nav>
+
+    {% block content %}
+    <!-- put the interesting (specific stuff) here -->
+    {% endblock %}
+
+    <hr>
+    This page was generated at {{current_time}}.
+    </body>
+</html>
