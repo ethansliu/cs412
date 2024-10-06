@@ -1,0 +1,25 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h1>Showing all Profiles</h1>
+
+<main class="grid-container"> <!-- was <div> -->
+    {% for p in profiles %}
+    <article> <!-- was <div> -->
+        
+        <img src="{{p.image_url}}" alt="{{p.image_url}}">
+
+        <div> <!-- added this! -->
+            <h2>{{p.firstName}} {{p.lastName}}</h2>
+            <h3> Lives in {{p.city}}</h3>
+            <p>
+                Email: {{p.email}}
+            </p>       
+        </div> <!-- added this! -->
+ 
+    </article> <!-- was <div> -->
+    {% endfor %}
+</main> <!-- was <div> -->
+
+{% endblock %}
