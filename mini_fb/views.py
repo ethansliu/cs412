@@ -10,7 +10,7 @@ class ShowAllView(ListView):
     '''A view to show all Articles.'''
 
     model = Profile
-    template_name = 'mini_fb/show_al_profiles.html'
+    template_name = 'mini_fb/show_all_profiles.html'
     context_object_name = 'profiles'
 
 
