@@ -1,0 +1,54 @@
+<!-- mini_fb/templates/mini_fb/show_profile.html -->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h1>{{profile.firstName}} {{profile.lastName}}'s Profile</h1>
+
+<main class="grid-container"> <!-- was <div> -->
+    <article class="featured"> <!-- was <div> -->
+        
+        <img src="{{profile.image_url}}" alt="{{profile.image_url}}">
+
+        <div> <!-- added this! -->
+            <h2>{{profile.firstName}} {{profile.lastName}}</h2>
+            <h3> Lives in {{profile.city}} </h3>
+            <p>
+                Email: {{profile.email}}
+            </p>       
+
+            
+        </div> <!-- added this! -->
+ 
+    </article> <!-- was <div> -->
+
+        <div>
+            {% if profile.get_status_messages %}
+                <h2> Status messages </h2>
+                <!-- call the Article's get_comments() method -->
+                <!-- {{article.get_comments}}  -->
+            
+                {% for sm in profile.get_status_messages %}
+                <div>
+                    <h4>
+                        {{sm.message}}
+                    </h4>
+                    <p>
+                        Posted Time: {{sm.timestamp}}
+                    </p>
+    
+                </div>
+                {% endfor %}
+    
+            {% else %}
+                <div>
+                    <h2> No status messages </h2>
+                </div>
+            {% endif %}
+    
+
+
+</div>
+</main> <!-- was <div> -->
+
+{% endblock %}
