@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
 class Profile(models.Model):
@@ -22,6 +24,11 @@ class Profile(models.Model):
         # instance of Article is the FK
         statusmessages = StatusMessage.objects.filter(profile=self)
         return statusmessages
+    
+    def get_absolute_url(self) -> str:
+        '''return the URL to redirect to after sucessful create'''
+ 
+        return reverse('profile_page', kwargs={'pk': self.pk})
     
 
 
