@@ -1,7 +1,7 @@
 {% extends 'mini_fb/base.html' %}
 {% block content %}
 
-<h2> Create New Profile </h2>
+<h2> Update Status Message </h2>
 
 <form method="POST" enctype="multipart/form-data">
     <!-- display the form (context variable) -->
@@ -15,12 +15,15 @@
 
         <tr>
             <td></td>
+            <p style="color:black; padding-left: 25vw; padding-right: 25vw;"> Are you sure you want to update: "{{status_message.message}}" </p>
             <td>
                 <!-- we need to add the submit button ourselves -->
-                <input type="submit" name="Create Profile">
+                <button type="submit"> Update </button>
                 {% csrf_token %}
             </form>
-            
+            <form method="GET" action="{% url 'profile_page' pk=status_message.profile.pk %}">
+                <button type="submit"> Cancel </button>
+            </form>
         </td>
         </tr>
         </table>

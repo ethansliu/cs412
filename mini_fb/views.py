@@ -6,7 +6,7 @@ from typing import Any
 
 from . models import * 
 from . forms import *
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # class-based view
 class ShowAllView(ListView):
@@ -59,6 +59,15 @@ class CreateStatusMessageView(CreateView):
         # (form.instance is the new Comment object)
         form.instance.profile = profile_page
 
+        sm = form.save()
+
+        files = self.request.FILES.getlist('files')
+        
+        for file in files:
+            image = Image()  
+            image.image_file = file  
+            image.status_message = sm  
+            image.save()  
         # delegaute work to the superclass version of this method
         return super().form_valid(form)
     
@@ -80,3 +89,45 @@ class CreateStatusMessageView(CreateView):
 
         return context
     
+class UpdateProfileView(UpdateView):
+
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = "mini_fb/update_profile_form.html"
+
+    def form_valid(self, form):
+        '''
+        Handle the form submission to create a new Article object.
+        '''
+        print(f'UpdateProfileView: form.cleaned_data={form.cleaned_data}')
+        return super().form_valid(form)
+    
+
+class DeleteStatusMessageView(DeleteView):
+    model = StatusMessage
+    template_name = "mini_fb/delete_status_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Pass the status_message object to the template
+        context['status_message'] = self.object
+        return context
+
+    def get_success_url(self):
+        # Redirect to the profile page after successful deletion
+        return reverse('profile_page', kwargs={'pk': self.object.profile.pk})
+    
+class UpdateStatusMessageView(UpdateView):
+    model = StatusMessage
+    template_name = "mini_fb/update_status_form.html"
+    fields = ['message']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Pass the status_message object to the template
+        context['status_message'] = self.object
+        return context
+
+    def get_success_url(self):
+        # Redirect to the profile page after successful deletion
+        return reverse('profile_page', kwargs={'pk': self.object.profile.pk})

@@ -9,8 +9,8 @@
     <article> <!-- was <div> -->
 
         <a href="{% url 'profile_page' pk=p.pk %}">
-            
-            <img src="{{p.image_url}}" alt="{{p.image_url}}">
+
+            <img src="{{p.image_file.url}}" alt="{{p.image_file.url}}">
 
         </a>
 

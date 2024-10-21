@@ -8,7 +8,7 @@
 <main class="grid-container"> <!-- was <div> -->
     <article class="featured"> <!-- was <div> -->
         <div class = "profileIMG">
-            <img src="{{profile.image_url}}" alt="{{profile.image_url}}">
+            <img src="{{profile.image_file.url}}" alt="{{profile.image_file.url}}">
         </div>
         <div> <!-- added this! -->
             <h2>{{profile.firstName}} {{profile.lastName}}</h2>
@@ -19,6 +19,9 @@
 
             <h4><a href="{% url 'create_status' profile.pk %}">
                 Add a comment</a>
+            </h4>
+            <h4><a href="{% url 'update_profile' profile.pk %}">
+                Update Profile</a>
             </h4>
 
         </div> <!-- added this! -->
@@ -39,9 +42,15 @@
                     <p>
                         Posted Time: {{sm.timestamp}}
                     </p>
-    
+                    {% for img in sm.get_images %}
+                        <img src="{{img.image_file.url}}" alt="{{img.image_file.url}}">
+                    {% endfor %}
+                    <a href= "{% url 'update_status' sm.pk %}"> Update </a>
+                    <a href= "{% url 'delete_status' sm.pk %}"> Delete </a>
+                    
                 </div>
                 {% endfor %}
+                
     
             {% else %}
                 <div>

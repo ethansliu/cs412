@@ -3,7 +3,8 @@
 
 <h2>Add a comment about {{profile_page.firstName}} {{profile_page.lastName}}</h2>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data" >
+    
     <!-- display the form (context variable) -->
     <!-- {{form}} -->
 
@@ -17,7 +18,12 @@
             <td></td>
             <td>
                 <!-- we need to add the submit button ourselves -->
+                <div>
+                    <input type="file" name = "files" multiple />
+                </div>
                 <input type="submit" name="Create Status Message">
+                
+                
                 {% csrf_token %}
             </form>
             <!-- NOTE: this is a separate form! -->

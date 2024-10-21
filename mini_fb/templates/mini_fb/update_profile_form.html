@@ -1,7 +1,7 @@
 {% extends 'mini_fb/base.html' %}
 {% block content %}
 
-<h2> Create New Profile </h2>
+<h2> Update Profile </h2>
 
 <form method="POST" enctype="multipart/form-data">
     <!-- display the form (context variable) -->
@@ -17,7 +17,7 @@
             <td></td>
             <td>
                 <!-- we need to add the submit button ourselves -->
-                <input type="submit" name="Create Profile">
+                <input type="submit" name="Update Profile">
                 {% csrf_token %}
             </form>
             

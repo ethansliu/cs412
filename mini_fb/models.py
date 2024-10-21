@@ -11,7 +11,8 @@ class Profile(models.Model):
     lastName = models.TextField(blank=False)
     city = models.TextField(blank=False)
     email = models.TextField(blank=False)
-    image_url = models.URLField(blank=True)
+    #image_url = models.URLField(blank=True)
+    image_file = models.ImageField(blank=True)
 
     def __str__(self):
         '''Return a string representation of this Article.'''
@@ -43,3 +44,17 @@ class StatusMessage(models.Model):
     def __str__(self):
         '''Return a string representation of this object.'''
         return f'{self.message}'
+    
+    def get_images(self):
+        return Image.objects.filter(status_message=self)
+
+    
+
+class Image(models.Model):
+    '''Encapsulate an image for a status message.'''
+    image_file = models.ImageField(upload_to='images/', blank=True)
+    status_message = models.ForeignKey(StatusMessage, on_delete=models.CASCADE)
+    upload_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.image_file.name
