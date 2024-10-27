@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from typing import Any
 
@@ -6,7 +6,7 @@ from typing import Any
 
 from . models import * 
 from . forms import *
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 
 # class-based view
 class ShowAllView(ListView):
@@ -131,3 +131,23 @@ class UpdateStatusMessageView(UpdateView):
     def get_success_url(self):
         # Redirect to the profile page after successful deletion
         return reverse('profile_page', kwargs={'pk': self.object.profile.pk})
+    
+
+class CreateFriendView(View):
+    # replace default dispatch
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        other_profile = Profile.objects.get(pk=self.kwargs['other_pk'])
+        profile.add_friend(other_profile)        
+        return redirect(reverse('profile_page', kwargs={'pk': profile.pk}))
+    
+
+class ShowFriendSuggestionsView(DetailView):
+    model = Profile
+    template_name = "mini_fb/friend_suggestions.html"
+    context_object_name = "profile"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['friend_suggestions'] = self.object.get_friend_suggestions()
+        return context

@@ -1,7 +1,7 @@
 {% extends 'mini_fb/base.html' %}
 {% block content %}
 
-<h2>Add a comment about {{profile_page.firstName}} {{profile_page.lastName}}</h2>
+<h2>Add a status message</h2>
 
 <form method="POST" enctype="multipart/form-data" >
     
@@ -10,6 +10,7 @@
 
     <!-- display as paragraphs -->
     <!-- {{form.as_p}} -->
+    
     <div id = "statusForm">
         <table>
         {{form.as_table}}

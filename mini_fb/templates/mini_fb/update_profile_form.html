@@ -9,6 +9,10 @@
 
     <!-- display as paragraphs -->
     <!-- {{form.as_p}} -->
+    <a href="{% url 'profile_page' pk=profile.pk %}" class="mini_fb_button">
+        Go back to {{profile.firstName}} {{profile.lastName}}'s Profile
+    </a>
+
     <div id = "profileForm">
         <table>
         {{form.as_table}}

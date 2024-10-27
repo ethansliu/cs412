@@ -101,6 +101,7 @@ nav li {
 
 #profileForm{
     margin: 0 auto;
+    padding-top: 10px;
 }
 
 #statusForm{
@@ -123,3 +124,39 @@ table{
     padding-right: 20vw;
 }
 
+.friendList {
+    grid-column: span 3;
+}
+
+.friendProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.friendList ul {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    flex-wrap: wrap; 
+}
+
+.friendList li {
+    margin: 0 10px;
+    list-style-type: none;
+    text-align: center;
+}
+
+.mini_fb_button {
+    border-radius: 8px;
+    background-color: #b3aea6;
+    color: #f0ebe4;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+nav{
+    margin-top: 1vh
+}

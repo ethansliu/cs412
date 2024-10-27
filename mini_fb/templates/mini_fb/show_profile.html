@@ -17,11 +17,14 @@
                 Email: {{profile.email}}
             </p>       
 
-            <h4><a href="{% url 'create_status' profile.pk %}">
+            <h4><a href="{% url 'create_status' profile.pk %}" class="mini_fb_button">
                 Add a comment</a>
             </h4>
-            <h4><a href="{% url 'update_profile' profile.pk %}">
+            <h4><a href="{% url 'update_profile' profile.pk %}" class="mini_fb_button">
                 Update Profile</a>
+            </h4>
+            <h4><a href="{% url 'friend_suggestions' profile.pk %}" class="mini_fb_button">
+                Friend Suggestions</a>
             </h4>
 
         </div> <!-- added this! -->
@@ -45,8 +48,8 @@
                     {% for img in sm.get_images %}
                         <img src="{{img.image_file.url}}" alt="{{img.image_file.url}}">
                     {% endfor %}
-                    <a href= "{% url 'update_status' sm.pk %}"> Update </a>
-                    <a href= "{% url 'delete_status' sm.pk %}"> Delete </a>
+                    <a href= "{% url 'update_status' sm.pk %}" class="mini_fb_button"> Update </a>
+                    <a href= "{% url 'delete_status' sm.pk %}" class="mini_fb_button"> Delete </a>
                     
                 </div>
                 {% endfor %}
@@ -60,6 +63,24 @@
     
 
 
+        </div>
+
+        <div class="friendList">
+            <article>
+            <h2>Friends</h2>
+            <ul>
+                {% for friend in profile.get_friends %}
+                    <li class="friendProfile">
+                        <a href="{% url 'profile_page' pk=friend.pk %}">
+                            <img src="{{friend.image_file.url}}" alt="{{friend.image_file.url}}">
+                        </a>
+                        {{friend.firstName}} {{friend.lastName}}
+                    </li>
+                {% empty %}
+                    <li>No friends to display.</li>
+                {% endfor %}
+            </ul>
+            </article>
         </div>
 </main> <!-- was <div> -->
 

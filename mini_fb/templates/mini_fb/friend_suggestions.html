@@ -1,0 +1,36 @@
+<!-- mini_fb/templates/mini_fb/show_profile.html -->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h1>People {{profile.firstName}} {{profile.lastName}} may know:</h1>
+
+<main class="grid-container"> <!-- was <div> -->
+    <div class="friendList">
+        <article>
+            <h2>
+                <a href="{% url 'profile_page' pk=profile.pk %}" class="mini_fb_button">
+                    Go back to {{profile.firstName}} {{profile.lastName}}'s Profile
+                </a>
+            </h2>
+            
+            <ul>
+                {% for suggestion in friend_suggestions %}
+                    <li class="friendProfile">
+                        <a href="{% url 'profile_page' pk=suggestion.pk %}">
+                            <img src="{{suggestion.image_file.url}}" alt="{{suggestion.image_file.url}}">
+                        </a>
+                        {{suggestion.firstName}} {{suggestion.lastName}}
+                        <a href="{% url 'add_friend' pk=profile.pk other_pk=suggestion.pk %}" class="mini_fb_button">
+                            Add Friend
+                        </a>
+                    </li>
+                {% empty %}
+                    <li>No friends suggested.</li>
+                {% endfor %}
+            </ul>
+        </article>
+    </div>
+</main> <!-- was <div> -->
+
+{% endblock %}
