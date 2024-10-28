@@ -160,3 +160,15 @@ table{
 nav{
     margin-top: 1vh
 }
+
+.messageList ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+}
+
+.messageList li {
+    margin: 0 10px;
+    list-style-type: none;
+    text-align: center;
+}

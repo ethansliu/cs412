@@ -1,0 +1,39 @@
+<!-- mini_fb/templates/mini_fb/show_profile.html -->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h1>People {{profile.firstName}} {{profile.lastName}} may know:</h1>
+
+<main class="grid-container" style="grid-template-columns:none;"> <!-- was <div> -->
+    <div class="messageList">
+        <article>
+            <h2>
+                <a href="{% url 'profile_page' pk=profile.pk %}" class="mini_fb_button">
+                    Go back to {{profile.firstName}} {{profile.lastName}}'s Profile
+                </a>
+            </h2>
+            
+            <ul>
+                {% for news_messages in news_feed %}
+                    <li class="friendProfile">
+                        <a href="{% url 'profile_page' pk=news_messages.profile.pk %}">
+                            <img src="{{news_messages.profile.image_file.url}}" alt="{{news_messages.profile.image_file.url}}">
+                        </a>
+                        {{news_messages.profile.firstName}} {{news_messages.profile.lastName}}
+                        <p>
+                            {{news_messages.message}}
+                        </p>
+                        <p>
+                            {{news_messages.timestamp}}
+                        </p>
+                    </li>
+                {% empty %}
+                    <li>No Status Messages in your News Feed</li>
+                {% endfor %}
+            </ul>
+        </article>
+    </div>
+</main> <!-- was <div> -->
+
+{% endblock %}
