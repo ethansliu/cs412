@@ -17,6 +17,7 @@
                 Email: {{profile.email}}
             </p>       
 
+            {% if user.is_authenticated and user == profile.user %}
             <h4><a href="{% url 'create_status' profile.pk %}" class="mini_fb_button">
                 Add a comment</a>
             </h4>
@@ -29,6 +30,7 @@
             <h4><a href="{% url 'news_feed' profile.pk %}" class="mini_fb_button">
                 News Feed </a>
             </h4>
+            {% endif %}
 
         </div> <!-- added this! -->
  
@@ -51,9 +53,10 @@
                     {% for img in sm.get_images %}
                         <img src="{{img.image_file.url}}" alt="{{img.image_file.url}}">
                     {% endfor %}
+                    {% if user.is_authenticated and user == profile.user %}
                     <a href= "{% url 'update_status' sm.pk %}" class="mini_fb_button"> Update </a>
                     <a href= "{% url 'delete_status' sm.pk %}" class="mini_fb_button"> Delete </a>
-                    
+                    {% endif %}
                 </div>
                 {% endfor %}
                 

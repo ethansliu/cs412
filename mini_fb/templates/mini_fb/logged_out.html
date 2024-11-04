@@ -1,0 +1,11 @@
+{% extends "mini_fb/base.html" %}  <!-- Replace with your actual base template if different -->
+
+{% block content %}
+    <h2>You have been logged out</h2>
+    <p>
+        Thank you for using mini_fb! 
+    </p> 
+    <p>
+        <a href="{% url 'show_all' %}"> Back to homepage </a>
+    </p>
+{% endblock %}

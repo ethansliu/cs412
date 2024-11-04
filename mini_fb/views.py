@@ -7,6 +7,8 @@ from typing import Any
 from . models import * 
 from . forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # class-based view
 class ShowAllView(ListView):
@@ -28,12 +30,16 @@ class CreateProfileView(CreateView):
     form_class = CreateProfileForm
     template_name = "mini_fb/create_profile_form.html"
 
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('login') 
+
     #def get_absolute_url(self) -> str:
         #'''return the URL to redirect to after sucessful create'''
  
         #return reverse("profile_page", kwargs={'pk': self.object.pk})
     
-class CreateStatusMessageView(CreateView):
+class CreateStatusMessageView(LoginRequiredMixin, CreateView):
 
     form_class = CreateStatusMessageForm
     template_name = "mini_fb/create_status_form.html"
@@ -89,7 +95,7 @@ class CreateStatusMessageView(CreateView):
 
         return context
     
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
 
     model = Profile
     form_class = UpdateProfileForm
@@ -103,7 +109,7 @@ class UpdateProfileView(UpdateView):
         return super().form_valid(form)
     
 
-class DeleteStatusMessageView(DeleteView):
+class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
     model = StatusMessage
     template_name = "mini_fb/delete_status_form.html"
 
@@ -117,7 +123,7 @@ class DeleteStatusMessageView(DeleteView):
         # Redirect to the profile page after successful deletion
         return reverse('profile_page', kwargs={'pk': self.object.profile.pk})
     
-class UpdateStatusMessageView(UpdateView):
+class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
     model = StatusMessage
     template_name = "mini_fb/update_status_form.html"
     fields = ['message']
@@ -133,7 +139,7 @@ class UpdateStatusMessageView(UpdateView):
         return reverse('profile_page', kwargs={'pk': self.object.profile.pk})
     
 
-class CreateFriendView(View):
+class CreateFriendView(LoginRequiredMixin, View):
     # replace default dispatch
     def dispatch(self, request, *args, **kwargs):
         profile = Profile.objects.get(pk=self.kwargs['pk'])
@@ -161,3 +167,4 @@ class ShowNewsFeedView(DetailView):
         context = super().get_context_data(**kwargs)
         context['news_feed'] = self.object.get_news_feed()
         return context
+    
