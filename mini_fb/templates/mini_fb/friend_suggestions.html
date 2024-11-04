@@ -21,7 +21,7 @@
                             <img src="{{suggestion.image_file.url}}" alt="{{suggestion.image_file.url}}">
                         </a>
                         {{suggestion.firstName}} {{suggestion.lastName}}
-                        <a href="{% url 'add_friend' pk=profile.pk other_pk=suggestion.pk %}" class="mini_fb_button">
+                        <a href="{% url 'add_friend' other_pk=suggestion.pk %}" class="mini_fb_button">
                             Add Friend
                         </a>
                     </li>

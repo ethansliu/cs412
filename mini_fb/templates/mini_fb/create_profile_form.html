@@ -1,9 +1,11 @@
 {% extends 'mini_fb/base.html' %}
 {% block content %}
 
+
+
 <h2> Create New Profile </h2>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class = "profile-form">
     <!-- display the form (context variable) -->
     <!-- {{form}} -->
 
@@ -11,6 +13,8 @@
     <!-- {{form.as_p}} -->
     <div id = "profileForm">
         <table>
+        {{user_creation_form.as_table}}
+
         {{form.as_table}}
 
         <tr>
@@ -18,6 +22,7 @@
             <td>
                 <!-- we need to add the submit button ourselves -->
                 <input type="submit" name="Create Profile">
+                
                 {% csrf_token %}
             </form>
             

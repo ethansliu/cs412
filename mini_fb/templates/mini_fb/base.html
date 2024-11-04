@@ -12,8 +12,7 @@
             
 
             {% if request.user.is_authenticated %}
-
-            <a href="{% url 'create_profile' %}" class="mini_fb_button">Create Profile</a>
+            
             <p>
                 <form action="{% url 'logout' %}" method="POST">
                     {% csrf_token %}
@@ -22,10 +21,12 @@
             </p>
 
             {% else %}
+            <a href="{% url 'create_profile' %}" class="mini_fb_button">Create Profile</a>
+
             <p>
                 <a href="{% url 'login' %}" class="mini_fb_button">Login</a>
             </p>
-
+            
             {% endif %}
 
         </ul>

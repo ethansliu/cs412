@@ -18,16 +18,16 @@
             </p>       
 
             {% if user.is_authenticated and user == profile.user %}
-            <h4><a href="{% url 'create_status' profile.pk %}" class="mini_fb_button">
+            <h4><a href="{% url 'create_status' %}" class="mini_fb_button">
                 Add a comment</a>
             </h4>
-            <h4><a href="{% url 'update_profile' profile.pk %}" class="mini_fb_button">
+            <h4><a href="{% url 'update_profile' %}" class="mini_fb_button">
                 Update Profile</a>
             </h4>
-            <h4><a href="{% url 'friend_suggestions' profile.pk %}" class="mini_fb_button">
+            <h4><a href="{% url 'friend_suggestions' %}" class="mini_fb_button">
                 Friend Suggestions</a>
             </h4>
-            <h4><a href="{% url 'news_feed' profile.pk %}" class="mini_fb_button">
+            <h4><a href="{% url 'news_feed' %}" class="mini_fb_button">
                 News Feed </a>
             </h4>
             {% endif %}
