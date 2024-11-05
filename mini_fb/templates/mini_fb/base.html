@@ -12,7 +12,6 @@
             
 
             {% if request.user.is_authenticated %}
-            
             <p>
                 <form action="{% url 'logout' %}" method="POST">
                     {% csrf_token %}

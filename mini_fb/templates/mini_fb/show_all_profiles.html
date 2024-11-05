@@ -2,6 +2,9 @@
 
 {% block content %}
 
+{% if request.user.is_authenticated %}
+    <a href="{% url 'profile_page' profile.pk %}" class="mini_fb_button">My Profile</a>
+{% endif %}
 <h1>Showing all Profiles</h1>
 
 <main class="grid-container"> <!-- was <div> -->

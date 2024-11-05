@@ -21,6 +21,12 @@ class ShowAllView(ListView):
     template_name = 'mini_fb/show_all_profiles.html'
     context_object_name = 'profiles'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context['profile'] = get_object_or_404(Profile, user=self.request.user)
+        return context
+
 
 class ShowProfilePageView(DetailView):
 
