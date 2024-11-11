@@ -1,0 +1,25 @@
+{% load static %}
+<html>
+    <head>
+        <title>Hello, world!</title>
+        <!-- <link rel="stylesheet" href="/static/styles.css"> -->
+        <link rel="stylesheet" href="https://cs-people.bu.edu/esliu/cs412_hw3statics/css/minifbStyles.css">
+    </head>
+    <body>
+
+    <nav>
+        <ul>
+            <!-- <a href="/hw/">Home</a> -->
+            <!-- <a href="/hw/about">About</a> -->
+             <!-- use the scriptlet URL function to look up a URL by name -->
+            <a href="{% url 'voters' %}">Main</a>
+            <a href="{% url 'graphs' %}">Graphs</a>
+        </ul>
+    </nav>
+
+    {% block content %}
+    <!-- put the interesting (specific stuff) here -->
+    {% endblock %}
+
+    </body>
+</html>

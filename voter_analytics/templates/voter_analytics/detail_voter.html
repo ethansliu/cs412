@@ -1,0 +1,78 @@
+{% extends 'voter_analytics/base.html' %}
+{% block content %}
+<h1>Voters</h1>
+<div class="row">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th style = "padding-left: 1vw;">Address</th>
+            <th style = "padding-left: 1vw;">Date of Birth</th>
+            <th style = "padding-left: 1vw;">Date of Registration</th>
+            <th style = "padding-left: 1vw;">Party Affiliation</th>
+            <th style = "padding-left: 1vw;">Voter Score</th>
+            
+        </tr>
+
+        <tr>
+            
+            <td> {{voter.first_name|title}} {{voter.last_name|title}} </td>
+            <td style = "padding-left: 1vw;">
+                {{voter.street_num}} {{voter.street_name|title}}{% if voter.apt_num %}, Apt {{voter.apt_num}}{% endif %}, {{voter.zip_code}}
+            </td>
+            <td style = "text-align: center;">{{voter.birthday}}</td>
+            <td style = "text-align: center;">{{voter.registration_date}}</td>
+            <td style = "padding-left: 1vw; text-align: center;">{% if voter.party == "D" %} Democratic Party
+                {% elif voter.party == "R" %} Republican Party
+                {% elif voter.party == "CC" %} Constitution Party
+                {% elif voter.party == "L" %} Libertarian Party
+                {% elif voter.party == "T" %} Tea Party
+                {% elif voter.party == "G" %} Green Party
+                {% elif voter.party == "J" %} Independent Party
+                {% elif voter.party == "Q" %} Reform Party
+                {% elif voter.party == "FF" %} Freedom Party
+                {% elif voter.party == "U" %} Undecided
+                {% elif voter.party == "O" %} Other
+                {% else %} Other
+                {% endif %}</td>
+            <td style = "text-align: center;">{{voter.voter_score}}</td>
+        </tr>
+
+    </table>
+
+    <br>
+    <br>
+
+    <table>
+        <tr>
+            <td style = "padding-left: 1vw;"><strong> V20 State </strong></td>
+            <td style = "padding-left: 1vw;"><strong> V21 Town </strong></td>
+            <td style = "padding-left: 1vw;"><strong> V21 Primary </strong></td>
+            <td style = "padding-left: 1vw;"><strong> V22 General </strong></td>
+            <td style = "padding-left: 1vw;"><strong> V23 Town </strong></td>
+        </tr>
+        <tr>
+            <td style = "text-align: center;"> {{ voter.v20_state }} </td>
+            <td style = "text-align: center;"> {{ voter.v21_town }} </td>
+            <td style = "text-align: center;"> {{ voter.v21_primary }} </td>
+            <td style = "text-align: center;"> {{ voter.v22_general }} </td>
+            <td style = "text-align: center;"> {{ voter.v23_town }} </td>
+        </tr>
+    </table>
+    </div>
+
+
+</div>
+
+<div>
+    <br>
+    <p>
+        <a href="https://www.google.com/maps/search/?api=1&query={{ voter.street_num }}+{{ voter.street_name }}+{{ voter.zip_code }}" target="_blank">
+            View Address on Google Maps
+        </a>
+    </p>
+</div>
+
+
+
+
+{% endblock %}

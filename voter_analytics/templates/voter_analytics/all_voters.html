@@ -1,0 +1,73 @@
+{% extends 'voter_analytics/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% include 'voter_analytics/search.html' %}
+    </div>
+
+    <h1>Voters</h1>
+    <div class="row">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th style = "padding-left: 1vw;">Date of Birth</th>
+                <th style = "padding-left: 1vw;">Date of Registration</th>
+                <th>Party Affiliation</th>
+                <th>Voter Score</th>
+            </tr>
+    
+            {% for v in voters %}
+            <tr>
+                
+                <td> <a href="{% url 'detail_voter' v.pk %}"> {{v.first_name|title}} {{v.last_name|title}} </a> </td>
+                <td>
+                    {{v.street_num}} {{v.street_name|title}}{% if v.apt_num %}, Apt {{v.apt_num}}{% endif %}, {{v.zip_code}}
+                </td>
+                <td style = "text-align: center;">{{v.birthday}}</td>
+                <td style = "text-align: center;">{{v.registration_date}}</td>
+                <td style = "padding-left: 1vw;">{% if v.party == "D" %} Democratic Party
+                    {% elif v.party == "R" %} Republican Party
+                    {% elif v.party == "CC" %} Constitution Party
+                    {% elif v.party == "L" %} Libertarian Party
+                    {% elif v.party == "T" %} Tea Party
+                    {% elif v.party == "G" %} Green Party
+                    {% elif v.party == "J" %} Independent Party
+                    {% elif v.party == "Q" %} Reform Party
+                    {% elif v.party == "FF" %} Freedom Party
+                    {% elif v.party == "U" %} Undecided
+                    {% elif v.party == "O" %} Other
+                    {% else %} Other
+                    {% endif %}</td>
+                <td style = "text-align: center;">{{v.voter_score}}</td>
+            </tr>
+            {% endfor %}
+    
+        </table>
+        </div>
+
+        <!-- navigation for different pages -->
+        <div class="row">
+            {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li>
+                        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                 
+                    </li>
+                {% endif %}
+                    <li class="">
+                        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                    </li>
+                {% if page_obj.has_next %}
+                    <li>
+                        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                    </li>
+                {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+
+    </div>
+    
+{% endblock %}

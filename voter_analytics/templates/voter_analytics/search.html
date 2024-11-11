@@ -1,0 +1,72 @@
+
+<h2>Search Form</h2>
+
+<form action="{% url 'voters' %}">
+<table>
+    <tr>
+        <th>Zip Code</th>
+        <td>
+            <select name="zip_code">
+                <option value="">Select Zip Code</option>
+                {% for zip in zip_code %}
+                    <option value="{{ zip }}" {% if zip == request.GET.zip_code %} selected {% endif %}>
+                        {{ zip }}
+                    </option>
+                {% endfor %}
+            </select>
+        </td>
+        
+    </tr>
+
+    <tr>
+        <th>Party</th>
+        <td>
+            <select name="party">
+                <option value="">Select Party</option>
+                {% for p in party %}
+                    <option value="{{ p }}" {% if p == request.GET.party %} selected {% endif %}>
+                        {{ p }}
+                    </option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <th>Min Birth Year</th>
+        <td>
+            <select name="min_birth_year">
+                <option value="">Select Min Birth Year</option>
+                {% for year in years %}
+                    <option value="{{ year }}" {% if year == request.GET.min_birth_year %}selected{% endif %}>
+                        {{ year }}
+                    </option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <th>Max Birth Year</th>
+        <td>
+            <select name="max_birth_year">
+                <option value="">Select Max Birth Year</option>
+                {% for year in years %}
+                    <option value="{{ year }}" {% if year == request.GET.max_birth_year %}selected{% endif %}>
+                        {{ year }}
+                    </option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td>
+            <input type="submit">
+        </td>
+    </tr>
+    
+    
+</table>
+</form>
