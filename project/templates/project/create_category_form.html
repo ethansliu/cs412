@@ -1,0 +1,31 @@
+{% extends 'project/base.html' %}
+{% block content %}
+
+<h2>Add New Category</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <!-- display the form (context variable) -->
+    <!-- {{form}} -->
+
+    <!-- display as paragraphs -->
+    <!-- {{form.as_p}} -->
+    <div id="categoryForm">
+        <table>
+        {{form.as_table}}
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Category">
+                {% csrf_token %}
+            </form>
+            <!-- NOTE: this is a separate form! -->
+            <form action="{% url 'show_closet' pk=closet.pk %}">
+                <input type="submit" value="Cancel">
+            </form>
+        </td>
+        </tr>
+        </table>
+    </div>
+
+{% endblock %}

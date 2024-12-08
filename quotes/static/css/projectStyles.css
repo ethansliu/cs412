@@ -1,0 +1,178 @@
+body{
+    background-color: rgb(209, 203, 191);
+    margin: 0 auto;
+    text-align: center;
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+
+ul{
+    text-align: center;
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+
+
+li {
+    padding: 0px;
+    list-style-type: none;
+}
+
+h1, h2, h3 {
+    color: #767f7e;
+}
+
+p {
+    color: #828b82;
+}
+
+header {
+    max-width: 1200px;
+    margin: 40px auto;
+    border-bottom: 1px solid #bbc7c7;
+}
+
+.grid-container {
+    background: #eee;
+    max-width: 900px;
+    display: grid;
+    /* grid-template-columns: 300px 300px 300px; */
+    grid-template-columns: repeat(3, 1fr);
+     grid-gap: 10px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+article.featured {
+    grid-column: span 3;
+    display: grid; /* nested grid */
+    gap: 60px;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    border-bottom: 1px #bbc7c7;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+article img {
+    width: 200px;
+    height: 250px;
+    border-radius: 8px;
+    margin-top: 3.8vh;
+    object-fit: cover;
+    object-position: center;
+}
+
+div.profileIMG img{
+    width: 350px;
+    height: 450px;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+article p, article h3 {
+    margin: 20px 10px;
+
+}
+
+nav li {
+    display: inline;
+}
+/* responsive styles: adapt to smaller screen sizes */
+@media screen and (max-width: 980px) {
+
+    article {
+        grid-column: span 3;
+        display: grid; /* nested grid */
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 760px) {
+
+    article, article.featured {
+        
+        display: block; 
+        margin: 0px 20px;
+    }
+}
+
+#profileForm{
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+#statusForm{
+    margin: 0 auto;
+}
+
+table{
+    margin: 0 auto;
+}
+
+#showStatusMessage{
+    grid-column: span 3;
+    display: inline-block;
+    gap: 60px;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    border-bottom: 1px #bbc7c7;
+    padding-bottom: 40px;
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+
+.friendList {
+    grid-column: span 3;
+}
+
+.friendProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.friendList ul {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    flex-wrap: wrap; 
+}
+
+.friendList li {
+    margin: 0 10px;
+    list-style-type: none;
+    text-align: center;
+}
+
+.mini_fb_button {
+    border-radius: 8px;
+    background-color: #b3aea6;
+    color: #f0ebe4;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+nav{
+    margin-top: 1vh
+}
+
+.messageList ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+}
+
+.messageList li {
+    margin: 0 10px;
+    list-style-type: none;
+    text-align: center;
+}
+
+.profile-form .helptext {
+    display: none;
+}

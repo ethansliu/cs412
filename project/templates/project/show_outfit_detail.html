@@ -1,0 +1,35 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>{{ outfit_detail.outfitName }}</h1>
+
+<main class="grid-container">
+    <h3>Created On: {{ outfit_detail.outfitCreated }}</h3>
+
+    {% if outfit_detail.top %}
+    <h4>Top: <a href="{% url 'show_clothes' outfit_detail.top.pk %}" class="mini_fb_button">{{ outfit_detail.top.color }} {{ outfit_detail.top.brand }}</a></h4>
+    {% endif %}
+
+    {% if outfit_detail.bottom %}
+    <h4>Bottom: <a href="{% url 'show_clothes' outfit_detail.bottom.pk %}" class="mini_fb_button">{{ outfit_detail.bottom.color }} {{ outfit_detail.bottom.brand }}</a></h4>
+    {% endif %}
+
+    {% if outfit_detail.outerwear %}
+    <h4>Outerwear: <a href="{% url 'show_clothes' outfit_detail.outerwear.pk %}" class="mini_fb_button">{{ outfit_detail.outerwear.color }} {{ outfit_detail.outerwear.brand }}</a></h4>
+    {% endif %}
+
+    {% if outfit_detail.shoes %}
+    <h4>Shoes: <a href="{% url 'show_clothes' outfit_detail.shoes.pk %}" class="mini_fb_button">{{ outfit_detail.shoes.color }} {{ outfit_detail.shoes.brand }}</a></h4>
+    {% endif %}
+
+    <div>
+        <a href="{% url 'update_outfit' pk=outfit_detail.pk %}" class="mini_fb_button">Update Outfit</a>
+        <a href="{% url 'delete_outfit' pk=outfit_detail.pk %}" class="mini_fb_button">Delete Outfit</a>
+    </div>
+    <div>
+        <a href="{% url 'show_outfits' %}" class="mini_fb_button">Back to Outfits</a>
+    </div>
+</main>
+
+{% endblock %}

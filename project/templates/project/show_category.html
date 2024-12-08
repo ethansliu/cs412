@@ -1,0 +1,32 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Showing {{ category }}</h1>
+
+<main class="grid-container">
+    <h4><a href="{% url 'create_clothes' category.pk %}" class="mini_fb_button">
+        Add a piece to {{ category }}</a>
+    </h4>
+    {% for clothes in category.get_clothes %}
+    <article>
+        <div>
+            <h2>
+                <a href= "{% url 'show_clothes' clothes.pk %}" class="mini_fb_button"> {{ clothes.color }} {{ clothes.brand }} </a>
+            </h2>
+            <h3>Price paid: {{ clothes.price }}</h3>
+            <h3>Size: {{ clothes.size }}</h3>
+            {% if clothes.image %}
+            <div>
+                <img src="{{ clothes.image.url }}" alt="Image of {{ clothes.color }} {{ clothes.brand }}" style="max-width: 200px; height: auto;">
+            </div>
+            {% endif %}
+        </div>
+    </article>
+    {% endfor %}
+    <div>
+        <a href="{% url 'show_closet' pk=category.closet.pk %}" class="mini_fb_button">Back to Closet</a>
+    </div>
+</main>
+
+{% endblock %}

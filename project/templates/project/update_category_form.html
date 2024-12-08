@@ -1,0 +1,31 @@
+{% block content %}
+
+<h2> Update Category </h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <!-- display the form (context variable) -->
+    <!-- {{form}} -->
+
+    <!-- display as paragraphs -->
+    <!-- {{form.as_p}} -->
+    <div id="categoryForm">
+        <table>
+        {{form.as_table}}
+
+        <tr>
+            <td></td>
+            <p style="color:black; padding-left: 25vw; padding-right: 25vw;"> Are you sure you want to update: "{{ category.categoryName }}" </p>
+            <td>
+                <!-- we need to add the submit button ourselves -->
+                <button type="submit"> Update </button>
+                {% csrf_token %}
+            </form>
+            <form method="GET" action="{% url 'show_closet' pk=category.closet.pk %}">
+                <button type="submit"> Cancel </button>
+            </form>
+        </td>
+        </tr>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Project</title>
+        <link rel="stylesheet" href="https://cs-people.bu.edu/esliu/cs412_hw3statics/css/projectStyles.css">
+    </head>
+    <body>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+            <!-- Link to the logged-in user's closet -->
+            <a href="{% url 'show_closet' user.pk %}" class="mini_fb_button">My Closet</a>
+            {% endif %}
+            
+            <!-- use the scriptlet URL function to look up a URL by name -->
+            <a href="{% url 'sell_clothes' %}" class="mini_fb_button">Sell</a>
+            <a href="{% url 'show_outfits' %}" class="mini_fb_button">Outfits</a>
+
+            
+
+        </ul>
+
+
+    </nav>
+
+    {% block content %}
+    <!-- put the interesting (specific stuff) here -->
+    {% endblock %}
+
+   
+    </body>
+</html>

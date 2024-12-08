@@ -1,4 +1,7 @@
 from django.db import models
+from django.urls import reverse
+from django.db.models import Q
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Closet(models.Model):
@@ -12,9 +15,19 @@ class Closet(models.Model):
     pantSize = models.TextField(blank=False)
     outerwearSize = models.TextField(blank=False)
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
     def __str__(self):
         '''Return a string representation of this Article.'''
         return f"{self.firstName} {self.lastName}'s Closet"
+    
+    def get_categories(self):
+        '''Retrieve all comments for this Article.'''
+
+        # use the ORM to filter Comments where this 
+        # instance of Article is the FK
+        category = Category.objects.filter(closet=self)
+        return category
 
 class Category(models.Model):
     closet = models.ForeignKey("Closet", on_delete=models.CASCADE)
@@ -23,6 +36,14 @@ class Category(models.Model):
     def __str__(self):
         '''Return a string representation of this Article.'''
         return f"{self.closet.firstName}'s {self.categoryName}"
+    
+    def get_clothes(self):
+        '''Retrieve all comments for this Article.'''
+
+        # use the ORM to filter Comments where this 
+        # instance of Article is the FK
+        clothe = Clothes.objects.filter(category=self)
+        return clothe
 
 class Clothes(models.Model):
     timestamp = models.DateTimeField(auto_now=True)
@@ -36,6 +57,8 @@ class Clothes(models.Model):
     def __str__(self):
         '''Return a string representation of this Article.'''
         return f"{self.category.closet.firstName}'s {self.color} {self.brand} {self.category.categoryName}"
+    
+
 
 class Outfit(models.Model):
     outfitCreated = models.DateTimeField(auto_now=True)
@@ -57,3 +80,10 @@ class Sell(models.Model):
     def __str__(self):
         '''Return a string representation of this Article.'''
         return f"{self.item} for sale"
+    
+    def get_clothes(self):
+        '''Retrieve all comments for this Article.'''
+
+        # use the ORM to filter Comments where this 
+        # instance of Article is the FK
+        return Clothes.objects.filter(id=self.item.id)

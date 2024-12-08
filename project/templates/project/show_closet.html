@@ -1,0 +1,39 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated and user == closet.user %}
+<h1>My Closet</h1>
+
+<main class="grid-container"> <!-- was <div> -->
+    <article> <!-- was <div> -->
+
+        <div> <!-- added this! -->
+            <h2>{{ closet.firstName }} {{ closet.lastName }}</h2>
+            <h3> Favorite Style: {{ closet.favoriteStyle }}</h3>
+            <p>
+                {% for category in closet.get_categories %}
+                <p>
+                    <a href= "{% url 'show_category' category.pk %}" class="mini_fb_button"> {{ category.categoryName }} </a>
+                    <h4><a href="{% url 'update_category' pk=category.pk %}" class="mini_fb_button">
+                        Update {{ category.categoryName }}</a>
+                    </h4>
+                    <h4><a href="{% url 'delete_category' pk=category.pk %}" class="mini_fb_button">
+                        Delete {{ category.categoryName }}</a>
+                    </h4>
+                </p>
+                {% endfor %}
+                <h4><a href="{% url 'create_category' pk=closet.pk %}" class="mini_fb_button">
+                    Add a category to {{ closet }} </a>
+                </h4>
+            </p>
+
+        </div> <!-- added this! -->
+ 
+    </article> <!-- was <div> -->
+</main> <!-- was <div> -->
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
+
+{% endblock %}

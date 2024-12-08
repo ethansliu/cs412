@@ -1,0 +1,29 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h2>Add New Outfit</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <!-- display the form (context variable) -->
+    <div id="outfitForm">
+        <table>
+        {{ form.as_table }}
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Outfit">
+                {% csrf_token %}
+            </td>
+        </tr>
+        </table>
+    </div>
+</form>
+
+<!-- NOTE: this is a separate form for canceling -->
+<form action="{% url 'show_outfits' %}">
+    <input type="submit" value="Cancel">
+</form>
+
+{% endblock %}
