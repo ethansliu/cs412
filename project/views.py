@@ -16,10 +16,64 @@ from django.contrib.auth import login
 class ShowHomeView(TemplateView):
     template_name = "project/home_page.html"
 
+class CreateClosetView(CreateView):
+    form_class = CreateClosetForm
+    template_name = "project/create_closet_form.html"
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('login') 
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_creation_form'] = UserCreationForm()
+        return context
+
+    def form_valid(self, form):
+        ''' Reconstruct the UserCreationForm from submitted POST data'''
+        user_creation_form = UserCreationForm(self.request.POST)
+
+        if user_creation_form.is_valid():
+
+            user = user_creation_form.save()
+
+            login(self.request, user)
+
+            form.instance.user = user
+
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
+        
+class UpdateClosetView(LoginRequiredMixin, UpdateView):
+    model = Closet
+    form_class = UpdateClosetForm
+    template_name = "project/update_closet_form.html"
+
+    def form_valid(self, form):
+        '''
+        Handle the form submission to update the Closet object.
+        '''
+        print(f'UpdateClosetView: form.cleaned_data={form.cleaned_data}')
+        return super().form_valid(form)
+
+    def get_object(self, queryset=None):
+        '''Ensure only the closet belonging to the logged-in user can be updated.'''
+        return get_object_or_404(Closet, user=self.request.user)
+
+    def get_success_url(self):
+        '''Redirect to a suitable page after successful update.'''
+        return reverse('show_closet', kwargs={'pk': self.object.pk})
+
+
 class ShowClosetView(LoginRequiredMixin, DetailView):
     model = Closet
     template_name = "project/show_closet.html"
     context_object_name = 'closet'
+
+    def get_object(self, queryset=None):
+        # Ensure the logged-in user matches the closet's user
+        return get_object_or_404(Closet, user=self.request.user)
 
 class ShowCategoryView(DetailView):
     model = Category
@@ -137,7 +191,7 @@ class DeleteClothesView(DeleteView):
         return reverse('show_category', kwargs={'pk': self.object.category.pk})
 
 
-class ShowSellClothesView(ListView):
+class ShowSellClothesView(LoginRequiredMixin, ListView):
     model = Sell
     template_name = "project/show_sell_clothes.html"
     context_object_name = 'sell'
@@ -156,6 +210,10 @@ class CreateSellClothesView(CreateView):
     def get_context_data(self, **kwargs):
         # Add context for use in the template
         context = super().get_context_data(**kwargs)
+        # Filter the items to only include clothes from the current user's closet
+        form = context['form']
+        form.fields['item'].queryset = Clothes.objects.filter(category__closet__user=self.request.user)
+        context['form'] = form
         return context
 
 
@@ -211,6 +269,13 @@ class CreateOutfitView(CreateView):
     def get_context_data(self, **kwargs):
         # Add context for use in the template
         context = super().get_context_data(**kwargs)
+        # Access the form and filter the fields dynamically
+        form = context['form']
+        form.fields['top'].queryset = Clothes.objects.filter(category__closet__user=self.request.user)
+        form.fields['bottom'].queryset = Clothes.objects.filter(category__closet__user=self.request.user)
+        form.fields['outerwear'].queryset = Clothes.objects.filter(category__closet__user=self.request.user)
+        form.fields['shoes'].queryset = Clothes.objects.filter(category__closet__user=self.request.user)
+        context['form'] = form
         return context
     
 class UpdateOutfitView(UpdateView):
@@ -222,6 +287,12 @@ class UpdateOutfitView(UpdateView):
         context = super().get_context_data(**kwargs)
         # Pass the outfit object to the template
         context['outfit'] = self.object
+        user_clothes = Clothes.objects.filter(category__closet__user=self.request.user)
+        form = context['form']
+        form.fields['top'].queryset = user_clothes
+        form.fields['bottom'].queryset = user_clothes
+        form.fields['outerwear'].queryset = user_clothes
+        form.fields['shoes'].queryset = user_clothes
         return context
 
     def get_success_url(self):

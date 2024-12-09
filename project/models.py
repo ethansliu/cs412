@@ -28,6 +28,11 @@ class Closet(models.Model):
         # instance of Article is the FK
         category = Category.objects.filter(closet=self)
         return category
+    
+    def get_absolute_url(self) -> str:
+        '''return the URL to redirect to after sucessful create'''
+ 
+        return reverse('show_closet', kwargs={'pk': self.pk})
 
 class Category(models.Model):
     closet = models.ForeignKey("Closet", on_delete=models.CASCADE)
@@ -67,7 +72,6 @@ class Outfit(models.Model):
     bottom = models.ForeignKey("Clothes", on_delete=models.CASCADE, related_name="bottom", null=True, blank=True)
     outerwear = models.ForeignKey("Clothes", on_delete=models.CASCADE, related_name="outerwear", null=True, blank=True)
     shoes = models.ForeignKey("Clothes", on_delete=models.CASCADE, related_name="shoes", null=True, blank=True)
-
     def __str__(self):
         '''Return a string representation of this Article.'''
         return f"{self.outfitName}"

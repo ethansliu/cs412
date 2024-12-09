@@ -2,6 +2,10 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+{% if outfit.top.category.closet.user == user or outfit.bottom.category.closet.user == user or outfit.outerwear.category.closet.user == user or outfit.shoes.category.closet.user == user %}
+
+
 <h2>Delete Outfit</h2>
 
 <form method="POST" enctype="multipart/form-data">
@@ -26,5 +30,10 @@
 <form action="{% url 'show_outfits' %}">
     <input type="submit" value="Cancel">
 </form>
-
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
 {% endblock %}

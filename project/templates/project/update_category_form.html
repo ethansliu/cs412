@@ -1,4 +1,9 @@
+{% extends 'project/base.html' %}
+
+
 {% block content %}
+
+{% if user.is_authenticated and user == category.closet.user %}
 
 <h2> Update Category </h2>
 
@@ -27,5 +32,9 @@
         </tr>
         </table>
     </div>
+
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
 
 {% endblock %}

@@ -1,6 +1,9 @@
 {% extends 'project/base.html' %}
 {% block content %}
 
+{% if user.is_authenticated and user == sell.item.category.closet.user %}
+
+
 <h2> Delete Clothing Item for Sale </h2>
 
 <form method="POST" enctype="multipart/form-data">
@@ -28,5 +31,9 @@
         </tr>
         </table>
     </div>
+
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
 
 {% endblock %}

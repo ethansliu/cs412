@@ -2,6 +2,9 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+{% if outfit_detail.top.category.closet.user == user or outfit_detail.bottom.category.closet.user == user or outfit_detail.outerwear.category.closet.user == user or outfit_detail.shoes.category.closet.user == user %}
+
 <h1>{{ outfit_detail.outfitName }}</h1>
 
 <main class="grid-container">
@@ -31,5 +34,10 @@
         <a href="{% url 'show_outfits' %}" class="mini_fb_button">Back to Outfits</a>
     </div>
 </main>
-
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
 {% endblock %}

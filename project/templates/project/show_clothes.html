@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% if user.is_authenticated and user == clothes.category.closet.user %}
+
 <h1>Showing {{ clothes }}</h1>
 
 <main class="grid-container">
@@ -28,5 +30,8 @@
         </div>
     </article>
 </main>
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
 
 {% endblock %}

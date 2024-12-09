@@ -1,0 +1,27 @@
+{% extends 'project/base.html' %}
+{% block content %}
+
+<h2> Create New Closet </h2>
+
+<form method="POST" enctype="multipart/form-data" class="closet-form">
+    <!-- display the form (context variable) -->
+    <div id="closetForm">
+        <table>
+        {{ user_creation_form.as_table }}
+
+        {{ form.as_table }}
+
+        <tr>
+            <td></td>
+            <td>
+                <!-- we need to add the submit button ourselves -->
+                <input type="submit" name="Create Closet">
+                
+                {% csrf_token %}
+            </form>
+        </td>
+        </tr>
+        </table>
+    </div>
+
+{% endblock %}

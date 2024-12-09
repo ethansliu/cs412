@@ -6,16 +6,21 @@
     <body>
     <nav>
         <ul>
+            <!-- use the scriptlet URL function to look up a URL by name -->
             {% if user.is_authenticated %}
             <!-- Link to the logged-in user's closet -->
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="mini_fb_button" style="border:none; text-decoration:underline; cursor:pointer; height: 28px; font-size: 14px;">Log Out</button>
+            </form>
             <a href="{% url 'show_closet' user.pk %}" class="mini_fb_button">My Closet</a>
-            {% endif %}
-            
-            <!-- use the scriptlet URL function to look up a URL by name -->
+            <a href="{% url 'update_closet' %}" class="mini_fb_button">Update My Closet</a>
             <a href="{% url 'sell_clothes' %}" class="mini_fb_button">Sell</a>
             <a href="{% url 'show_outfits' %}" class="mini_fb_button">Outfits</a>
-
+            {% endif %}
             
+            <a href="{% url 'home_page' %}" class="mini_fb_button">Home</a>
+
 
         </ul>
 

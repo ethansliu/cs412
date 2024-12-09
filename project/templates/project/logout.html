@@ -1,0 +1,11 @@
+{% extends "project/base.html" %}  <!-- Replace with your actual base template if different -->
+
+{% block content %}
+    <h2>You have been logged out</h2>
+    <p>
+        Thank you for using Closet Curator! 
+    </p> 
+    <p>
+        <a href="{% url 'home_page' %}"> Back to homepage </a>
+    </p>
+{% endblock %}

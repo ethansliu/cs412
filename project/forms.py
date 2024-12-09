@@ -1,5 +1,35 @@
 from django import forms
-from .models import Clothes, Category, Sell, Outfit
+from .models import Clothes, Category, Sell, Outfit, Closet
+
+
+class CreateClosetForm(forms.ModelForm):
+    firstName = forms.CharField(label="First Name", required=True)
+    lastName = forms.CharField(label="Last Name", required=True)
+    favoriteStyle = forms.CharField(label="Favorite Style", required=True)
+    favoriteBrand = forms.CharField(label="Favorite Brand", required=True)
+    userWeight = forms.CharField(label="Weight", required=True)
+    userHeight = forms.CharField(label="Height", required=True)
+    shirtSize = forms.CharField(label="Shirt Size", required=True)
+    pantSize = forms.CharField(label="Pant Size", required=True)
+    outerwearSize = forms.CharField(label="Outerwear Size", required=True)
+
+    class Meta:
+        model = Closet
+        fields = [
+            'firstName', 'lastName', 'favoriteStyle', 'favoriteBrand',
+            'userWeight', 'userHeight', 'shirtSize', 'pantSize', 'outerwearSize'
+        ]
+
+class UpdateClosetForm(forms.ModelForm):
+
+    class Meta:
+        model = Closet
+        fields = [
+            'firstName', 'lastName', 'favoriteStyle', 'favoriteBrand',
+            'userWeight', 'userHeight', 'shirtSize', 'pantSize', 'outerwearSize'
+        ]
+
+
 
 class CreateClothesForm(forms.ModelForm):
 

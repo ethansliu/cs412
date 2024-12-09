@@ -9,25 +9,27 @@
         Add a piece to {{ category }}</a>
     </h4>
     {% for items in sell %}
-    <article>
-        <div>
-            <h2>
-                <a href="{% url 'show_clothes' items.item.pk %}" class="mini_fb_button"> {{ items.item.color }} {{ items.item.brand }} </a>
-            </h2>
-            <h3>Sell Price: {{ items.sellPrice }}</h3>
-            <h3>Platform: {{ items.platform }}</h3>
-            <h3>Size: {{ items.item.size }}</h3>
-            {% if items.item.image %}
+        {% if items.item.category.closet.user == user %}
+        <article>
             <div>
-                <img src="{{ items.item.image.url }}" alt="Image of {{ items.item.color }} {{ items.item.brand }}" style="max-width: 200px; height: auto;">
+                <h2>
+                    <a href="{% url 'show_clothes' items.item.pk %}" class="mini_fb_button"> {{ items.item.color }} {{ items.item.brand }} </a>
+                </h2>
+                <h3>Sell Price: {{ items.sellPrice }}</h3>
+                <h3>Platform: {{ items.platform }}</h3>
+                <h3>Size: {{ items.item.size }}</h3>
+                {% if items.item.image %}
+                <div>
+                    <img src="{{ items.item.image.url }}" alt="Image of {{ items.item.color }} {{ items.item.brand }}" style="max-width: 200px; height: auto;">
+                </div>
+                {% endif %}
+                <div>
+                    <a href= "{% url 'update_sell' items.pk %}" class="mini_fb_button"> Update </a>
+                    <a href= "{% url 'delete_sell' items.pk %}" class="mini_fb_button"> Delete </a>
+                </div>
             </div>
-            {% endif %}
-            <div>
-                <a href= "{% url 'update_sell' items.pk %}" class="mini_fb_button"> Update </a>
-                <a href= "{% url 'delete_sell' items.pk %}" class="mini_fb_button"> Delete </a>
-            </div>
-        </div>
-    </article>
+        </article>
+        {% endif %}
     {% endfor %}
 </main>
 

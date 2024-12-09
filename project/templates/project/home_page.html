@@ -8,8 +8,19 @@
     </h2>
     <h3>
         The all in one tool to help organize your closet.<br>
-        To get started, create an account below.
     </h3>
+    <div>
+        {% if user.is_authenticated %}
+            <!-- Link to the logged-in user's closet -->
+            <p> Use the button below or in the navigation bar to access your closet: </p>
+            <a href="{% url 'show_closet' user.pk %}" class="mini_fb_button">My Closet</a>
+        {% else %}
+            <p> To get started, create an account with us or log in below: </p>
+            <a href="{% url 'create_closet' %}" class="mini_fb_button">Create Closet</a>
+            <a href="{% url 'login' %}" class="mini_fb_button"> Login </a>
+        {% endif %}
+        
+    </div>
 
 </main>
 

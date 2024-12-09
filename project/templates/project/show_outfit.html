@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
 <h1>Showing Outfits</h1>
 
 <main class="grid-container">
@@ -9,31 +10,35 @@
         Add a new outfit</a>
     </h4>
     {% for outfit in outfits %}
-    <article>
-        <div>
-            <h2>
-                <a href="{% url 'show_outfit_detail' outfit.pk %}" class="mini_fb_button"> {{ outfit.outfitName }} </a>  
-            </h2>
-            <h3>Created On: {{ outfit.outfitCreated }}</h3>
-            {% if outfit.top %}
-            <h4>Top: <a href="{% url 'show_clothes' outfit.top.pk %}" class="mini_fb_button">{{ outfit.top.color }} {{ outfit.top.brand }}</a></h4>
-            {% endif %}
-            {% if outfit.bottom %}
-            <h4>Bottom: <a href="{% url 'show_clothes' outfit.bottom.pk %}" class="mini_fb_button">{{ outfit.bottom.color }} {{ outfit.bottom.brand }}</a></h4>
-            {% endif %}
-            {% if outfit.outerwear %}
-            <h4>Outerwear: <a href="{% url 'show_clothes' outfit.outerwear.pk %}" class="mini_fb_button">{{ outfit.outerwear.color }} {{ outfit.outerwear.brand }}</a></h4>
-            {% endif %}
-            {% if outfit.shoes %}
-            <h4>Shoes: <a href="{% url 'show_clothes' outfit.shoes.pk %}" class="mini_fb_button">{{ outfit.shoes.color }} {{ outfit.shoes.brand }}</a></h4>
-            {% endif %}
+        {% if outfit.top.category.closet.user == user or outfit.bottom.category.closet.user == user or outfit.outerwear.category.closet.user == user or outfit.shoes.category.closet.user == user %}
+        <article>
             <div>
-                <a href="{% url 'update_outfit' pk=outfit.pk %}" class="mini_fb_button">Update Outfit</a>
-                <a href="{% url 'delete_outfit' pk=outfit.pk %}" class="mini_fb_button">Delete Outfit</a>
+                <h2>
+                    <a href="{% url 'show_outfit_detail' outfit.pk %}" class="mini_fb_button"> {{ outfit.outfitName }} </a>  
+                </h2>
+                <h3>Created On: {{ outfit.outfitCreated }}</h3>
+                {% if outfit.top %}
+                <h4>Top: <a href="{% url 'show_clothes' outfit.top.pk %}" class="mini_fb_button">{{ outfit.top.color }} {{ outfit.top.brand }}</a></h4>
+                {% endif %}
+                {% if outfit.bottom %}
+                <h4>Bottom: <a href="{% url 'show_clothes' outfit.bottom.pk %}" class="mini_fb_button">{{ outfit.bottom.color }} {{ outfit.bottom.brand }}</a></h4>
+                {% endif %}
+                {% if outfit.outerwear %}
+                <h4>Outerwear: <a href="{% url 'show_clothes' outfit.outerwear.pk %}" class="mini_fb_button">{{ outfit.outerwear.color }} {{ outfit.outerwear.brand }}</a></h4>
+                {% endif %}
+                {% if outfit.shoes %}
+                <h4>Shoes: <a href="{% url 'show_clothes' outfit.shoes.pk %}" class="mini_fb_button">{{ outfit.shoes.color }} {{ outfit.shoes.brand }}</a></h4>
+                {% endif %}
+                <div>
+                    <a href="{% url 'update_outfit' pk=outfit.pk %}" class="mini_fb_button">Update Outfit</a>
+                    <a href="{% url 'delete_outfit' pk=outfit.pk %}" class="mini_fb_button">Delete Outfit</a>
+                </div>
             </div>
-        </div>
-    </article>
+        </article>
+        {% endif %}
     {% endfor %}
 </main>
-
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
 {% endblock %}

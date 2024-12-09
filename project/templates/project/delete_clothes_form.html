@@ -1,6 +1,8 @@
 {% extends 'project/base.html' %}
 {% block content %}
 
+{% if user.is_authenticated and user == clothes.category.closet.user %}
+
 <h2> Delete Clothing Item </h2>
 
 <form method="POST" enctype="multipart/form-data">
@@ -21,12 +23,16 @@
                 <button type="submit"> Delete </button>
                 {% csrf_token %}
             </form>
-            <form method="GET" action="{% url 'show_category' pk=clothes.category.pk %}">
+            <form method="GET" action="{% url 'show_clothes' pk=clothes.pk %}">
                 <button type="submit"> Cancel </button>
             </form>
         </td>
         </tr>
         </table>
     </div>
+
+{% else %}
+<h1>This is not your closet.</h1>
+{% endif %}
 
 {% endblock %}
