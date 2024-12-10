@@ -4,14 +4,19 @@
 
 <h1>Showing Clothes for Sale</h1>
 
+<nav>
+    <ul>
+        <a href="{% url 'add_sell' %}" class="mini_fb_button">
+            Add a piece for sale</a>
+    </ul>
+</nav>
+
 <main class="grid-container">
-    <h4><a href="{% url 'add_sell' %}" class="mini_fb_button">
-        Add a piece to {{ category }}</a>
-    </h4>
+
     {% for items in sell %}
         {% if items.item.category.closet.user == user %}
-        <article>
-            <div>
+        <article class="sell-item">
+            <div class="item-info">
                 <h2>
                     <a href="{% url 'show_clothes' items.item.pk %}" class="mini_fb_button"> {{ items.item.color }} {{ items.item.brand }} </a>
                 </h2>
@@ -23,14 +28,15 @@
                     <img src="{{ items.item.image.url }}" alt="Image of {{ items.item.color }} {{ items.item.brand }}" style="max-width: 200px; height: auto;">
                 </div>
                 {% endif %}
-                <div>
-                    <a href= "{% url 'update_sell' items.pk %}" class="mini_fb_button"> Update </a>
-                    <a href= "{% url 'delete_sell' items.pk %}" class="mini_fb_button"> Delete </a>
-                </div>
+            </div>
+            <div class="item-actions">
+                <a href="{% url 'update_sell' items.pk %}" class="mini_fb_button">Update</a>
+                <a href="{% url 'delete_sell' items.pk %}" class="mini_fb_button">Delete</a>
             </div>
         </article>
         {% endif %}
     {% endfor %}
 </main>
+
 
 {% endblock %}

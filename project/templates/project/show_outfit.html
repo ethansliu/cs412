@@ -5,16 +5,20 @@
 {% if user.is_authenticated %}
 <h1>Showing Outfits</h1>
 
+<nav>
+    <ul>
+        <a href="{% url 'add_outfit' %}" class="mini_fb_button">
+            Add a new outfit</a>
+    </ul>
+</nav>
+
 <main class="grid-container">
-    <h4><a href="{% url 'add_outfit' %}" class="mini_fb_button">
-        Add a new outfit</a>
-    </h4>
     {% for outfit in outfits %}
         {% if outfit.top.category.closet.user == user or outfit.bottom.category.closet.user == user or outfit.outerwear.category.closet.user == user or outfit.shoes.category.closet.user == user %}
-        <article>
-            <div>
+        <article class="outfit-item">
+            <div class="outfit-info">
                 <h2>
-                    <a href="{% url 'show_outfit_detail' outfit.pk %}" class="mini_fb_button"> {{ outfit.outfitName }} </a>  
+                    <a href="{% url 'show_outfit_detail' outfit.pk %}" class="mini_fb_button">{{ outfit.outfitName }}</a>  
                 </h2>
                 <h3>Created On: {{ outfit.outfitCreated }}</h3>
                 {% if outfit.top %}
@@ -29,15 +33,16 @@
                 {% if outfit.shoes %}
                 <h4>Shoes: <a href="{% url 'show_clothes' outfit.shoes.pk %}" class="mini_fb_button">{{ outfit.shoes.color }} {{ outfit.shoes.brand }}</a></h4>
                 {% endif %}
-                <div>
-                    <a href="{% url 'update_outfit' pk=outfit.pk %}" class="mini_fb_button">Update Outfit</a>
-                    <a href="{% url 'delete_outfit' pk=outfit.pk %}" class="mini_fb_button">Delete Outfit</a>
-                </div>
+            </div>
+            <div class="outfit-actions">
+                <a href="{% url 'update_outfit' pk=outfit.pk %}" class="mini_fb_button">Update Outfit</a>
+                <a href="{% url 'delete_outfit' pk=outfit.pk %}" class="mini_fb_button">Delete Outfit</a>
             </div>
         </article>
         {% endif %}
     {% endfor %}
 </main>
+
 {% else %}
 <h1>This is not your closet.</h1>
 {% endif %}

@@ -21,7 +21,7 @@ class CreateClosetView(CreateView):
     template_name = "project/create_closet_form.html"
 
     def get_login_url(self) -> str:
-        '''return the URL required for login'''
+        # Return the URL required for login 
         return reverse('login') 
     
     def get_context_data(self, **kwargs):
@@ -30,7 +30,7 @@ class CreateClosetView(CreateView):
         return context
 
     def form_valid(self, form):
-        ''' Reconstruct the UserCreationForm from submitted POST data'''
+        # Reconstruct the UserCreationForm from submitted POST data
         user_creation_form = UserCreationForm(self.request.POST)
 
         if user_creation_form.is_valid():
@@ -51,18 +51,16 @@ class UpdateClosetView(LoginRequiredMixin, UpdateView):
     template_name = "project/update_closet_form.html"
 
     def form_valid(self, form):
-        '''
-        Handle the form submission to update the Closet object.
-        '''
+        # Handle the form submission to update the Closet object
         print(f'UpdateClosetView: form.cleaned_data={form.cleaned_data}')
         return super().form_valid(form)
 
     def get_object(self, queryset=None):
-        '''Ensure only the closet belonging to the logged-in user can be updated.'''
+        # Ensure only the closet belonging to the logged-in user can be updated
         return get_object_or_404(Closet, user=self.request.user)
 
     def get_success_url(self):
-        '''Redirect to a suitable page after successful update.'''
+        # Redirect to a suitable page after successful update 
         return reverse('show_closet', kwargs={'pk': self.object.pk})
 
 

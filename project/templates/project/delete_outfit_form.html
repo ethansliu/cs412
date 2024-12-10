@@ -16,20 +16,21 @@
 
         <tr>
             <td></td>
+            <p style="color:black; padding-left: 25vw; padding-right: 25vw;"> Are you sure you want to delete: "{{outfit}}" </p>
             <td>
-                <p style="color:black; padding-left: 25vw; padding-right: 25vw;"> Are you sure you want to delete: "{{ outfit.outfitName }}" </p>
-                <input type="submit" value="Delete Outfit">
+                <button type="submit">Delete Outfit</button>
                 {% csrf_token %}
+            </form>
+            <form method="GET" action="{% url 'show_outfits' %}">
+                <button type="submit">Cancel</button>
+            </form>
             </td>
         </tr>
         </table>
     </div>
-</form>
 
 <!-- NOTE: this is a separate form for canceling -->
-<form action="{% url 'show_outfits' %}">
-    <input type="submit" value="Cancel">
-</form>
+
 {% else %}
 <h1>This is not your closet.</h1>
 {% endif %}

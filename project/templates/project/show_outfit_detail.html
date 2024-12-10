@@ -7,32 +7,87 @@
 
 <h1>{{ outfit_detail.outfitName }}</h1>
 
+<nav>
+    <ul>
+        <a href="{% url 'show_outfits' %}" class="mini_fb_button">Back to Outfits</a>
+        <a href="{% url 'update_outfit' pk=outfit_detail.pk %}" class="mini_fb_button">Update Outfit</a>
+        <a href="{% url 'delete_outfit' pk=outfit_detail.pk %}" class="mini_fb_button">Delete Outfit</a>
+
+    </ul>
+</nav>
+
 <main class="grid-container">
     <h3>Created On: {{ outfit_detail.outfitCreated }}</h3>
 
     {% if outfit_detail.top %}
-    <h4>Top: <a href="{% url 'show_clothes' outfit_detail.top.pk %}" class="mini_fb_button">{{ outfit_detail.top.color }} {{ outfit_detail.top.brand }}</a></h4>
+    <article class="clothes-item">
+        <div class="clothes-details">
+            {% if outfit_detail.top %}
+            <h4>Top: <a href="{% url 'show_clothes' outfit_detail.top.pk %}" class="mini_fb_button">{{ outfit_detail.top.color }} {{ outfit_detail.top.brand }}</a></h4>
+            {% endif %}
+        </div>
+        <div class="clothes-image">
+            {% if outfit_detail.top.image %}
+            <div class="clothes-image">
+                <img src="{{ outfit_detail.top.image.url }}" alt="Image of {{ clothes.color }} {{ clothes.brand }}">
+            </div>
+        {% endif %}
+        </div>
+    </article>
     {% endif %}
 
     {% if outfit_detail.bottom %}
-    <h4>Bottom: <a href="{% url 'show_clothes' outfit_detail.bottom.pk %}" class="mini_fb_button">{{ outfit_detail.bottom.color }} {{ outfit_detail.bottom.brand }}</a></h4>
+    <article class="clothes-item">
+        <div class="clothes-details">
+            {% if outfit_detail.bottom %}
+            <h4>Bottom: <a href="{% url 'show_clothes' outfit_detail.bottom.pk %}" class="mini_fb_button">{{ outfit_detail.bottom.color }} {{ outfit_detail.bottom.brand }}</a></h4>
+            {% endif %}
+        </div>
+        <div class="clothes-image">
+            {% if outfit_detail.bottom.image %}
+            <div class="clothes-image">
+                <img src="{{ outfit_detail.bottom.image.url }}" alt="Image of {{ clothes.color }} {{ clothes.brand }}">
+            </div>
+        {% endif %}
+        </div>
+    </article>
     {% endif %}
 
     {% if outfit_detail.outerwear %}
-    <h4>Outerwear: <a href="{% url 'show_clothes' outfit_detail.outerwear.pk %}" class="mini_fb_button">{{ outfit_detail.outerwear.color }} {{ outfit_detail.outerwear.brand }}</a></h4>
+    <article class="clothes-item">
+        <div class="clothes-details">
+            {% if outfit_detail.outerwear %}
+            <h4>Outerwear: <a href="{% url 'show_clothes' outfit_detail.outerwear.pk %}" class="mini_fb_button">{{ outfit_detail.outerwear.color }} {{ outfit_detail.outerwear.brand }}</a></h4>
+            {% endif %}
+        </div>
+        <div class="clothes-image">
+            {% if outfit_detail.outerwear.image %}
+            <div class="clothes-image">
+                <img src="{{ outfit_detail.outerwear.image.url }}" alt="Image of {{ clothes.color }} {{ clothes.brand }}">
+            </div>
+        {% endif %}
+        </div>
+    </article>
     {% endif %}
 
     {% if outfit_detail.shoes %}
-    <h4>Shoes: <a href="{% url 'show_clothes' outfit_detail.shoes.pk %}" class="mini_fb_button">{{ outfit_detail.shoes.color }} {{ outfit_detail.shoes.brand }}</a></h4>
+    <article class="clothes-item">
+        <div class="clothes-details">
+            {% if outfit_detail.shoes %}
+            <h4>Shoes: <a href="{% url 'show_clothes' outfit_detail.shoes.pk %}" class="mini_fb_button">{{ outfit_detail.shoes.color }} {{ outfit_detail.shoes.brand }}</a></h4>
+            {% endif %}
+        </div>
+        <div class="clothes-image">
+            {% if  outfit_detail.shoes.image %}
+            <div class="clothes-image">
+                <img src="{{ outfit_detail.shoes.image.url }}" alt="Image of {{ clothes.color }} {{ clothes.brand }}">
+            </div>
+        {% endif %}
+        </div>
+    </article>
     {% endif %}
 
-    <div>
-        <a href="{% url 'update_outfit' pk=outfit_detail.pk %}" class="mini_fb_button">Update Outfit</a>
-        <a href="{% url 'delete_outfit' pk=outfit_detail.pk %}" class="mini_fb_button">Delete Outfit</a>
-    </div>
-    <div>
-        <a href="{% url 'show_outfits' %}" class="mini_fb_button">Back to Outfits</a>
-    </div>
+
 </main>
 {% else %}
 <h1>This is not your closet.</h1>

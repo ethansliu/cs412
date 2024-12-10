@@ -2,6 +2,7 @@ from django import forms
 from .models import Clothes, Category, Sell, Outfit, Closet
 
 
+# create closet form with all the editable fields
 class CreateClosetForm(forms.ModelForm):
     firstName = forms.CharField(label="First Name", required=True)
     lastName = forms.CharField(label="Last Name", required=True)
@@ -20,6 +21,7 @@ class CreateClosetForm(forms.ModelForm):
             'userWeight', 'userHeight', 'shirtSize', 'pantSize', 'outerwearSize'
         ]
 
+# update closet form with all the editable fields
 class UpdateClosetForm(forms.ModelForm):
 
     class Meta:
@@ -29,8 +31,7 @@ class UpdateClosetForm(forms.ModelForm):
             'userWeight', 'userHeight', 'shirtSize', 'pantSize', 'outerwearSize'
         ]
 
-
-
+# create clothes form with all the editable fields
 class CreateClothesForm(forms.ModelForm):
 
     brand = forms.CharField(label="Brand", required=True)
@@ -43,7 +44,7 @@ class CreateClothesForm(forms.ModelForm):
         model = Clothes
         fields = ['brand', 'color', 'size', 'price', 'image', ]
 
-
+# create sell form with all the editable fields
 class CreateSellClothesForm(forms.ModelForm):
     item = forms.ModelChoiceField(queryset=Clothes.objects.all(), label="Clothing Item", required=True)
     platform = forms.CharField(label="Platform", required=True)
@@ -53,6 +54,7 @@ class CreateSellClothesForm(forms.ModelForm):
         model = Sell
         fields = ['item', 'platform', 'sellPrice']
 
+# create category form with all the editable fields
 class CreateCategoryForm(forms.ModelForm):
     categoryName = forms.CharField(label="Category Name", required=True)
 
@@ -60,6 +62,7 @@ class CreateCategoryForm(forms.ModelForm):
         model = Category
         fields = ['categoryName']
 
+# create outfit form with all the editable fields
 class CreateOutfitForm(forms.ModelForm):
     outfitName = forms.CharField(label="Outfit Name", required=True)
     top = forms.ModelChoiceField(queryset=Clothes.objects.all(), label="Top", required=False)

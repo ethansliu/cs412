@@ -6,7 +6,15 @@
 
 <h1>Showing {{ clothes }}</h1>
 
-<main class="grid-container">
+<nav>
+    <ul>
+        <a href="{% url 'show_category' pk=clothes.category.pk %}" class="mini_fb_button">Back to {{clothes.category}}</a>
+        <a href= "{% url 'update_clothes' clothes.pk %}" class="mini_fb_button">Update</a>
+        <a href= "{% url 'delete_clothes' clothes.pk %}" class="mini_fb_button">Delete</a>
+    </ul>
+</nav>
+
+<main class="newcontainer">
     <article>
         <div>
             <h2>
@@ -19,15 +27,9 @@
                 <img src="{{ clothes.image.url }}" alt="Image of {{ clothes.color }} {{ clothes.brand }}" style="max-width: 200px; height: auto;">
             </div>
             {% endif %}
-        </div>
-            <a href= "{% url 'update_clothes' clothes.pk %}" class="mini_fb_button"> Update </a>
-            <a href= "{% url 'delete_clothes' clothes.pk %}" class="mini_fb_button"> Delete </a>
-        <div>
 
         </div>
-        <div>
-            <a href="{% url 'show_category' clothes.category.pk %}" class="mini_fb_button">Back to Category</a>
-        </div>
+        
     </article>
 </main>
 {% else %}

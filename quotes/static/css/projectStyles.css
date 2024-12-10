@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(209, 203, 191);
+    background-color: #acb4bd;
     margin: 0 auto;
     text-align: center;
     padding-left: 10vw;
@@ -24,6 +24,7 @@ h1, h2, h3 {
 
 p {
     color: #828b82;
+
 }
 
 header {
@@ -32,15 +33,142 @@ header {
     border-bottom: 1px solid #bbc7c7;
 }
 
+.newcontainer {
+    background-color: #c7cdd4;
+    width: 20vw;
+    margin: 0 auto;
+    padding: 2vw;
+    border-radius: 8px;
+    min-width: fit-content;
+}
+
+.categorycontainer {
+    background-color: #e8ecf1;
+    height: 10vh;
+    width: 18vw;
+    margin: 0 auto;
+    align-content: center;
+    font-size: larger;
+    min-width: 200px;
+    min-height: 40px;
+}
+
+.categorychanges {
+    background-color: #e8ecf1;
+    height: 10vh;
+    width: 18vw;
+    margin: 0 auto;
+    align-content: center;
+    min-width: 200px;
+    min-height: 40px;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e8ecf1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+}
+
+.category-name {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+.category-actions {
+    display: flex;
+    gap: 10px;
+}
+
 .grid-container {
-    background: #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    background: #c7cdd4;
     max-width: 900px;
-    display: grid;
-    /* grid-template-columns: 300px 300px 300px; */
-    grid-template-columns: repeat(3, 1fr);
-     grid-gap: 10px;
-    max-width: 1200px;
     margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.clothes-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e8ecf1;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.clothes-details {
+    flex: 1;
+    text-align: left;
+    margin-right: 120px;
+    margin-left: 70px;
+}
+
+.clothes-image img {
+    max-width: 150px;
+    max-height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center;
+    margin-right: 70px;
+}
+
+.sell-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e8ecf1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item-info {
+    flex: 1;
+    text-align: left;
+    margin-right: 120px;
+    margin-left: 70px;
+}
+
+.item-actions {
+    display: flex;
+    gap: 10px;
+    margin-right: 70px;
+}
+
+.outfit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e8ecf1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.outfit-info {
+    flex: 1;
+    text-align: left;
+    margin-right: 120px;
+    margin-left: 70px;
+}
+
+.outfit-actions {
+    display: flex;
+    gap: 10px;
+    margin-right: 70px;
 }
 
 article.featured {
@@ -81,22 +209,28 @@ nav li {
 /* responsive styles: adapt to smaller screen sizes */
 @media screen and (max-width: 980px) {
 
+    /*
     article {
         grid-column: span 3;
-        display: grid; /* nested grid */
+        display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 60px;
         align-items: center;
     }
+    */
+
 }
 
 @media screen and (max-width: 760px) {
 
+    /*
     article, article.featured {
         
         display: block; 
         margin: 0px 20px;
     }
+    */
+
 }
 
 #profileForm{
@@ -150,7 +284,7 @@ table{
 
 .mini_fb_button {
     border-radius: 8px;
-    background-color: #b3aea6;
+    background-color: #878d94;
     color: #f0ebe4;
     padding: 5px;
     margin-top: 5px;
